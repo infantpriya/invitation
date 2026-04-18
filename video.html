@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tamil Invitation Video</title>
+    <!-- Load elegant Tamil fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Tiro+Tamil:ital@0;1&family=Mukta+Malar:wght@400;600;700&family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --red: #8b0000;
+            --gold: #FFDF00;
+            --gold-dark: #DAA520;
+            --white: #ffffff;
+            --font-tamil-heading: 'Tiro Tamil', serif;
+            --font-tamil-body: 'Mukta Malar', sans-serif;
+            --font-english-names: 'Cinzel', serif;
+        }
+
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            background: #000; overflow: hidden;
+            font-family: var(--font-tamil-body);
+            display: flex; justify-content: center; align-items: center;
+        }
+
+        /* 9:16 Aspect Ratio Container */
+        .video-container {
+            position: relative;
+            width: 100%; max-width: 450px; 
+            aspect-ratio: 9/16;
+            background-image: url('church_bg.png');
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+            box-shadow: 0 0 50px rgba(255, 223, 0, 0.2);
+        }
+
+        /* Cinematic Overlay */
+        .cinematic-glow {
+            position: absolute; inset: 0;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.4) 0%, rgba(139,0,0,0.4) 70%, rgba(0,0,0,0.85) 100%);
+            z-index: 1;
+            animation: pulse-glow 4s infinite alternate;
+        }
+
+        @keyframes pulse-glow {
+            0% { opacity: 0.8; }
+            100% { opacity: 1; }
+        }
+
+        /* Scene 1: Angelic Gates */
+        .gate {
+            position: absolute; top: 0; width: 50%; height: 100%;
+            background: linear-gradient(135deg, var(--red), #4a0000);
+            z-index: 100;
+            display: flex; justify-content: center; align-items: center;
+            border: 2px solid var(--gold-dark);
+        }
+        
+        .gate-left {
+            left: 0; transform-origin: left; border-right: 4px solid var(--gold-dark);
+            box-shadow: 5px 0 20px rgba(0,0,0,0.8);
+            animation: open-gate-left 3s 1s cubic-bezier(0.645, 0.045, 0.355, 1) forwards;
+        }
+        
+        .gate-right {
+            right: 0; transform-origin: right; border-left: 4px solid var(--gold-dark);
+            box-shadow: -5px 0 20px rgba(0,0,0,0.8);
+            animation: open-gate-right 3s 1s cubic-bezier(0.645, 0.045, 0.355, 1) forwards;
+        }
+
+        .gate-left::after { content: '🕊️'; font-size: 5rem; position: absolute; right: 10px; opacity: 0.8; filter: drop-shadow(0 0 10px var(--gold)); }
+        .gate-right::after { content: '🕊️'; font-size: 5rem; position: absolute; left: 10px; opacity: 0.8; transform: scaleX(-1); filter: drop-shadow(0 0 10px var(--gold)); }
+
+        @keyframes open-gate-left { 100% { transform: scaleX(0); opacity: 0; visibility: hidden; } }
+        @keyframes open-gate-right { 100% { transform: scaleX(0); opacity: 0; visibility: hidden; } }
+
+        /* General Scene Styles */
+        .scene {
+            position: absolute; inset: 0; z-index: 10;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 2rem;
+            color: var(--white); text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            opacity: 0; pointer-events: none;
+        }
+
+        h1, h2, h3 { font-family: var(--font-tamil-heading); color: var(--gold); text-shadow: 0 0 15px rgba(218, 165, 32, 0.8); margin: 0.5rem 0; line-height: 1.3; }
+        .english-name { font-family: var(--font-english-names); color: var(--gold); font-size: 2.2rem; text-shadow: 0 0 10px rgba(255,255,255,0.5); margin: 0.5rem 0; letter-spacing: 1px; }
+        p { font-size: 1.15rem; line-height: 1.6; margin: 0.5rem 0; font-weight: 600; }
+
+        /* Glass Panel */
+        .text-panel {
+            background: rgba(20, 0, 0, 0.55);
+            border: 1px solid rgba(255, 223, 0, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            backdrop-filter: blur(6px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+            width: 85%;
+        }
+
+        /* Animation Sequence Timing */
+        /* Scene 1: Title (2s - 5.5s) */
+        #scene1 { animation: Sequence 3.5s 1.5s forwards; }
+        
+        /* Scene 2: Bible (6s - 10s) */
+        #scene2 { animation: Sequence 4s 5.5s forwards; }
+        
+        /* Scene 3: Invite (10.5s - 15.5s) */
+        #scene3 { animation: Sequence 5s 10s forwards; }
+        
+        /* Scene 4: Church (16s - 19.5s) */
+        #scene4 { animation: Sequence 3.5s 15.5s forwards; }
+        
+        /* Scene 5: Reception (20s - 23.5s) */
+        #scene5 { animation: Sequence 3.5s 19.5s forwards; }
+        
+        /* Scene 6: Closing (24s - 30s) */
+        #scene6 { animation: SequenceEnd 6s 23.5s forwards; }
+
+        @keyframes Sequence {
+            0% { opacity: 0; transform: translateY(20px) scale(0.95); }
+            15% { opacity: 1; transform: translateY(0) scale(1); }
+            85% { opacity: 1; transform: translateY(0) scale(1.02); }
+            100% { opacity: 0; transform: translateY(-20px) scale(0.95); }
+        }
+
+        @keyframes SequenceEnd {
+            0% { opacity: 0; transform: translateY(20px) scale(0.95); }
+            15% { opacity: 1; transform: translateY(0) scale(1); }
+            100% { opacity: 1; transform: translateY(0) scale(1.03); }
+        }
+
+        /* Flying light particles */
+        .particles { position: absolute; inset: 0; z-index: 5; pointer-events: none; }
+        .particle {
+            position: absolute; width: 5px; height: 5px; background: white; border-radius: 50%;
+            box-shadow: 0 0 12px 3px var(--gold); animation: float-up 6s infinite linear; opacity: 0;
+        }
+
+        @keyframes float-up {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            20% { opacity: 0.7; transform: translateY(80vh) scale(1); }
+            80% { opacity: 0.7; }
+            100% { transform: translateY(-10vh) scale(0); opacity: 0; }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="video-container" id="captureArea">
+        <div class="cinematic-glow"></div>
+        <div class="particles" id="particles"></div>
+
+        <!-- The Gates (Scene 1 Opening) -->
+        <div class="gate gate-left"></div>
+        <div class="gate gate-right"></div>
+
+        <!-- SCENE 1: Title -->
+        <div id="scene1" class="scene">
+            <h1 style="font-size: 2.8rem; line-height: 1.4;">முதல் திருவிருந்து<br>அழைப்பிதழ்</h1>
+        </div>
+
+        <!-- SCENE 2: Bible Verse -->
+        <div id="scene2" class="scene">
+            <div class="text-panel">
+                <h1 style="font-family: serif; font-size: 4rem; opacity: 0.3; position: absolute; top: -20px; left: 15px;">"</h1>
+                <p style="font-family: var(--font-tamil-heading); font-size: 1.4rem; line-height: 1.6; color: var(--gold-dark); text-align: left; padding: 0 10px;">
+                    ஜீவ அப்பம் நானே,<br>
+                    என்னிடத்தில் வருகிறவன் ஒருக்காலும் பசியடையான்,<br>
+                    என்னிடத்தில் விசுவாசமாயிருக்கிறவன் ஒருக்காலும் தாகமடையான்.
+                </p>
+                <h3 style="margin-top: 1.5rem; text-align: right; color: var(--gold);">— யோவான் 6:35</h3>
+            </div>
+        </div>
+
+        <!-- SCENE 3: Invite Message -->
+        <div id="scene3" class="scene">
+            <div class="text-panel" style="padding: 1.5rem; width: 95%;">
+                <p style="margin-bottom: 0.5rem; color: var(--gold-dark);">மிகுந்த மகிழ்ச்சியுடன் எங்கள் மகன்</p>
+                <div class="english-name" style="font-size: 2rem;">C. Cecil Antony<br>Heartson</div>
+                
+                <h4 style="color: var(--gold); margin: 1rem 0 0.5rem 0; font-size: 1rem;">பெற்றோர்கள்:</h4>
+                <div style="font-family: var(--font-english-names); font-size: 1rem;">C. Valerian Gracias Cyril</div>
+                <div style="font-family: var(--font-english-names); font-size: 1rem;">& R. Infant Mychiline Priya</div>
+                
+                <hr style="border: 0; height: 1px; background: rgba(255,223,0,0.3); margin: 1rem 0;">
+                <p style="font-size: 1rem; color: var(--gold-dark); line-height: 1.4;">முதல் திருவிருந்தை பெறும் புனித நிகழ்விற்கு தங்களையும் உங்கள் குடும்பத்தினரையும் அன்புடன் அழைக்கிறோம்.</p>
+            </div>
+        </div>
+
+        <!-- SCENE 4: Church Details -->
+        <div id="scene4" class="scene">
+            <div class="text-panel">
+                <h2 style="font-size: 1.8rem; margin-bottom: 0.5rem;">&#9962;</h2>
+                <h3 style="font-size: 1.4rem; color: var(--gold);">இடம்:</h3>
+                <h3 style="font-size: 1.5rem; line-height: 1.3; margin: 0.5rem 0;">வேளாங்கண்ணி ஆரோக்கிய அன்னை ஆலயம்</h3>
+                <p style="font-size: 1rem;">ரத்தினம் நகர், சேரன் மா நகர்<br>கோயம்புத்தூர் – 641048</p>
+                <hr style="border: 0; height: 1px; background: rgba(255,223,0,0.3); margin: 1rem 0;">
+                <p style="color: var(--gold-dark);">தேதி: <span style="color: var(--white);">ஞாயிறு, 3 மே 2026</span></p>
+                <p style="color: var(--gold-dark);">நேரம்: <span style="color: var(--white);">காலை 11:00</span></p>
+            </div>
+        </div>
+
+        <!-- SCENE 5: Reception -->
+        <div id="scene5" class="scene">
+            <div class="text-panel">
+                <h2 style="font-size: 2rem; margin-bottom: 1rem;">&#127863;</h2>
+                <h3 style="font-size: 1.4rem; color: var(--gold-dark); margin-bottom: 1rem;">விருந்து நடைபெறும் இடம்</h3>
+                <div class="english-name" style="font-size: 1.8rem;">Zone Connect</div>
+                <p style="font-size: 1.1rem; margin-top: 0.5rem;">39, கலப்பட்டி மெயின் ரோடு<br>கோயம்புத்தூர் – 641014</p>
+            </div>
+        </div>
+
+        <!-- SCENE 6: Closing Message -->
+        <div id="scene6" class="scene">
+            <div class="text-panel" style="background: rgba(20, 0, 0, 0.7);">
+                <p style="font-size: 1.8rem; line-height: 1.6; color: var(--gold);">இந்நாளை உங்கள் வருகையும் ஜெபங்களும் மேலும் ஆசீர்வதிக்கட்டும்.</p>
+                <h2 style="margin-top: 2rem; font-size: 3rem;">&#10013;</h2>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const container = document.getElementById('particles');
+        for(let i=0; i<40; i++) {
+            let p = document.createElement('div');
+            p.className = 'particle';
+            p.style.left = Math.random() * 100 + '%';
+            p.style.animationDelay = (Math.random() * 6) + 's';
+            p.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            container.appendChild(p);
+        }
+    </script>
+</body>
+</html>
