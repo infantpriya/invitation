@@ -342,12 +342,12 @@ END:VCALENDAR`;
         }
         if (input.includes('church') || input.includes('where') || input.includes('venue') || input.includes('location')) {
             if (input.includes('reception') || input.includes('party')) {
-                return "The reception venue is: <strong>Zone Connect</strong>.<br>Address: 39, Kalapatti Main Road, Coimbatore – 641014.<br><a href='https://maps.google.com/?q=Zone+Connect+39+Kalapatti+Main+Road+Coimbatore' target='_blank' style='color:#8b0000; font-weight:bold;'>View Map 📍</a>";
+                return "The reception venue is: <strong>Zone Connect</strong>.<br>Address: 39, Kalapatti Main Road, Coimbatore – 641048.<br><a href='https://maps.google.com/?q=Zone+Connect+39+Kalapatti+Main+Road+Coimbatore' target='_blank' style='color:#8b0000; font-weight:bold;'>View Map 📍</a>";
             }
-            return "The holy event takes place at: <strong>Vailankanni Arockia Annai Church</strong>.<br>Rathinam Nagar, Cheran Managar, Coimbatore - 641048.";
+            return "The holy event takes place at: <strong>Vailankanni Arockia Annai Church</strong>.<br>Rathinam Nagar, Cheran Ma Nagar, Coimbatore - 641048.";
         }
         if (input.includes('reception') || input.includes('food') || input.includes('party')) {
-            return "The reception venue is: <strong>Zone Connect</strong>.<br>Address: 39, Kalapatti Main Road, Coimbatore – 641014.<br><a href='https://maps.google.com/?q=Zone+Connect+39+Kalapatti+Main+Road+Coimbatore' target='_blank' style='color:#8b0000; font-weight:bold;'>View Map 📍</a>";
+            return "The reception venue is: <strong>Zone Connect</strong>.<br>Address: 39, Kalapatti Main Road, Coimbatore – 641048.<br><a href='https://maps.google.com/?q=Zone+Connect+39+Kalapatti+Main+Road+Coimbatore' target='_blank' style='color:#8b0000; font-weight:bold;'>View Map 📍</a>";
         }
         if (input.includes('who') || input.includes('parents') || input.includes('boy') || input.includes('son')) {
             return "Our beloved son <strong>C. Cecil Antony Heartson</strong> is receiving his First Holy Communion! Parents are C. Valerian Gracias Cyril and R. Infant Mychiline Priya.";
