@@ -12,12 +12,12 @@ document.addEventListener('DOMContentLoaded', () => {
         openBtn.addEventListener('click', () => {
             isOpened = true;
             gateway.classList.add('open');
-            createBurst(window.innerWidth / 2, window.innerHeight / 2, 40); // Big golden burst
+            createBurst(window.innerWidth / 2, window.innerHeight / 2, 40);
 
             setTimeout(() => {
                 gateway.classList.add('hidden');
                 mainContent.classList.add('visible');
-                initFireflies(); // Start angelic particles only after open
+                initFireflies();
             }, 1200);
         });
     }
@@ -34,11 +34,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
                 
-                // Trigger Typewriter when quote section becomes visible
                 if (entry.target.classList.contains('quote') && !isTypingStarted) {
                     isTypingStarted = true;
                     typeWriterEffect(typewriterQuote, () => {
-                        quoteSource.classList.add('visible'); // Show source after typing
+                        quoteSource.classList.add('visible');
                     });
                 }
             }
@@ -50,9 +49,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function typeWriterEffect(element, callback) {
         if(!element) return;
         const textToType = element.getAttribute('data-text');
-        element.innerHTML = ''; // clear it
+        element.innerHTML = '';
         let i = 0;
-        const speed = 40; // ms per char
+        const speed = 40;
         
         function typeWriter() {
             if (i < textToType.length) {
@@ -60,13 +59,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 i++;
                 setTimeout(typeWriter, speed);
             } else {
-                element.classList.add('typing-done'); // removes cursor
+                element.classList.add('typing-done');
                 if(callback) callback();
             }
         }
         setTimeout(typeWriter, 500);
     }
-
 
     /* --- 3. Parallax Background & 3D Mouse Tilt --- */
     const parallaxBg = document.getElementById('parallax-bg');
@@ -83,12 +81,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const xCenter = window.innerWidth / 2;
         const yCenter = window.innerHeight / 2;
 
-        // 1. Move Background Parallax
         const bgMoveX = (mouseX - xCenter) / 50;
         const bgMoveY = (mouseY - yCenter) / 50;
         if(parallaxBg) parallaxBg.style.transform = `translate(${-bgMoveX}px, ${-bgMoveY}px) scale(1.05)`;
 
-        // 2. Tilt Glass Panels based on mouse position relative to element
         tiltElements.forEach(el => {
             const rect = el.getBoundingClientRect();
             if (rect.top > window.innerHeight || rect.bottom < 0) return;
@@ -101,14 +97,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
             
-            // Interactive Shine
             const shineX = ((mouseX - rect.left) / rect.width) * 100;
             const shineY = ((mouseY - rect.top) / rect.height) * 100;
             el.style.background = `radial-gradient(circle at ${shineX}% ${shineY}%, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.6) 40%, rgba(255,255,255,0.4) 100%)`;
         });
     });
 
-    // Reset tilts on mouse leave
     document.addEventListener('mouseleave', () => {
         if(parallaxBg) parallaxBg.style.transform = `translate(0, 0) scale(1.05)`;
         tiltElements.forEach(el => {
@@ -116,7 +110,6 @@ document.addEventListener('DOMContentLoaded', () => {
             el.style.background = `rgba(255, 255, 255, 0.6)`;
         });
     });
-
 
     /* --- 4. Celestial Particle Engine --- */
     const fireflies = [];
@@ -154,17 +147,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 f.vy += (Math.random() - 0.5) * 0.6;
             }
 
-            // Scatter from mouse or attract towards it
             const dx = mouseX - f.x;
             const dy = mouseY - f.y;
             const dist = Math.sqrt(dx*dx + dy*dy);
             
             if (dist < 200) { 
-                f.vx += (dx / dist) * 0.05; // Gentle pull towards mouse (magic cursor effect)
+                f.vx += (dx / dist) * 0.05;
                 f.vy += (dy / dist) * 0.05;
             }
 
-            // Speed limit
             const speed = Math.sqrt(f.vx*f.vx + f.vy*f.vy);
             if (speed > 2) {
                 f.vx = (f.vx / speed) * 2;
@@ -173,7 +164,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             f.x += f.vx; f.y += f.vy;
 
-            // Screen bounds wrapping
             if (f.x < -20) f.x = window.innerWidth + 20;
             if (f.x > window.innerWidth + 20) f.x = -20;
             if (f.y < -20) f.y = window.innerHeight + 20;
@@ -192,20 +182,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const rsvpResponse = document.getElementById('rsvpResponse');
     const responseMsg = document.getElementById('responseMsg');
 
-    if (btnAccept && btnDecline) {
+    if (btnAccept) {
         btnAccept.addEventListener('click', (e) => {
             createBurst(e.clientX, e.clientY, 20);
-            rsvpContainer.style.display = 'none';
-            responseMsg.innerHTML = "Thank you! We eagerly anticipate your presence. ✨";
-            responseMsg.style.color = "#8b0000";
-            rsvpResponse.classList.remove('hidden');
+            if(rsvpContainer) rsvpContainer.style.display = 'none';
+            if(responseMsg) {
+                responseMsg.innerHTML = "மிக்க நன்றி! உங்கள் வருகையை ஆவலுடன் எதிர்பார்க்கிறோம். ✨";
+                responseMsg.style.color = "#8b0000";
+            }
+            if(rsvpResponse) rsvpResponse.classList.remove('hidden');
         });
+    }
 
+    if (btnDecline) {
         btnDecline.addEventListener('click', () => {
-            rsvpContainer.style.display = 'none';
-            responseMsg.innerHTML = "We will miss you! Thank you for your continued prayers and blessings. 🙏";
-            responseMsg.style.color = "#5c4e40";
-            rsvpResponse.classList.remove('hidden');
+            if(rsvpContainer) rsvpContainer.style.display = 'none';
+            if(responseMsg) {
+                responseMsg.innerHTML = "நீங்கள் வர இயலாதது வருத்தமே. உங்கள் ஜெபங்களுக்கு நன்றி. 🙏";
+                responseMsg.style.color = "#5c4e40";
+            }
+            if(rsvpResponse) rsvpResponse.classList.remove('hidden');
         });
     }
 
@@ -216,11 +212,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const event = `BEGIN:VCALENDAR
 VERSION:2.0
 BEGIN:VEVENT
-DTSTART:20260503T110000
-DTEND:20260503T150000
-SUMMARY:First Holy Communion - C. Cecil Antony Heartson
+DTSTART:20260503T053000Z
+DTEND:20260503T093000Z
+SUMMARY:முதல் திருவிருந்து - C. Cecil Antony Heartson
 LOCATION:Vailankanni Arockia Annai Church, Coimbatore
-DESCRIPTION:Reception to follow at Zone Connect, 39, Kalapatti Main Road, Coimbatore
+DESCRIPTION:விருந்து நடைபெறும் இடம் Zone Connect, 39, கலப்பட்டி மெயின் ரோடு
 END:VEVENT
 END:VCALENDAR`;
             
@@ -257,7 +253,6 @@ END:VCALENDAR`;
 
                 document.body.appendChild(sparkle);
                 
-                // Animate outwards
                 setTimeout(() => {
                     sparkle.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(0)`;
                     sparkle.style.opacity = '0';
@@ -268,8 +263,7 @@ END:VCALENDAR`;
         }
     }
 
-
-    /* --- 6. 🤖 Interactive AI Event Assistant --- */
+    /* --- 6. 🤖 Interactive AI Event Assistant (Tamil) --- */
     const botTrigger = document.getElementById('ai-bot-trigger');
     const chatWindow = document.getElementById('ai-chat-window');
     const closeChatBtn = document.getElementById('closeAiChat');
@@ -291,7 +285,6 @@ END:VCALENDAR`;
             setTimeout(()=> botTrigger.style.transform = 'scale(1)', 10);
         });
 
-        // Expose global function for chip clicks
         window.askAI = function(question) {
             processChat(question);
         };
@@ -309,26 +302,22 @@ END:VCALENDAR`;
         });
     }
 
-    // Simplistic Rule-Based "AI" Logic
     function processChat(userText) {
-        // Add User Message
         addChatMessage(userText, 'user');
         aiInputText.value = '';
-
-        // Simulate thinking delay
         showTypingIndicator();
 
         setTimeout(() => {
             removeTypingIndicator();
             const response = generateAIResponse(userText.toLowerCase());
             addChatMessage(response, 'bot');
-        }, 1000 + Math.random() * 800); // 1-1.8s delay
+        }, 1000 + Math.random() * 800);
     }
 
     function addChatMessage(text, sender) {
         const msgDiv = document.createElement('div');
         msgDiv.className = `ai-msg ${sender}`;
-        msgDiv.innerHTML = text; // Allow simple HTML in responses
+        msgDiv.innerHTML = text;
         aiChatBody.appendChild(msgDiv);
         aiChatBody.scrollTop = aiChatBody.scrollHeight;
     }
@@ -347,34 +336,29 @@ END:VCALENDAR`;
         if(ind) ind.remove();
     }
 
-    // The Brain of the Event Assistant
     function generateAIResponse(input) {
-        if (input.includes('when') || input.includes('time') || input.includes('date') || input.includes('day')) {
-            return "The First Holy Communion is on <strong>Sunday, 3rd May 2026</strong>. <br>The service begins exactly at <strong>11:00 AM</strong>.";
+        if (input.includes('எப்போது') || input.includes('நேரம்') || input.includes('தேதி')) {
+            return "முதல் திருவிருந்து <strong>ஞாயிறு, 3 மே 2026</strong> அன்று நடைபெறும். <br>நிகழ்வு <strong>காலை 11:00</strong> மணிக்கு தொடங்கும்.";
         }
-        if (input.includes('where') || input.includes('church') || input.includes('location') || input.includes('mass')) {
-            if (input.includes('reception') || input.includes('party')) {
-                return "The reception will be held at <strong>Zone Connect</strong>.<br>Address: 39, Kalapatti Main Road, Coimbatore - 641 014.<br><a href='https://maps.google.com/?q=Zone+Connect+39+Kalapatti+Main+Road+Coimbatore' target='_blank' style='color:#8b0000; font-weight:bold;'>Open Map 📍</a>";
+        if (input.includes('ஆலயம்') || input.includes('எங்கே') || input.includes('இடம்') || input.includes('சர்ச்')) {
+            if (input.includes('விருந்து')) {
+                return "விருந்து நடைபெறும் இடம்: <strong>Zone Connect</strong>.<br>முகவரி: 39, கலப்பட்டி மெயின் ரோடு, கோயம்புத்தூர் – 641048.<br><a href='https://maps.google.com/?q=Zone+Connect+39+Kalapatti+Main+Road+Coimbatore' target='_blank' style='color:#8b0000; font-weight:bold;'>காண வரைபடம் 📍</a>";
             }
-            return "The Holy Mass will take place at <strong>Vailankanni Arockia Annai Church</strong>.<br>Located at: Rathinam Nagar, Cheran Managar, Coimbatore - 641048.";
+            return "புனித நிகழ்வு நடைபெறும் இடம்: <strong>வேளாங்கண்ணி ஆரோக்கிய அன்னை ஆலயம்</strong>.<br>ரத்தினம் நகர், சேரன் மா நகர், கோயம்புத்தூர் – 641048.";
         }
-        if (input.includes('who') || input.includes('parents') || input.includes('child') || input.includes('boy')) {
-            return "We are celebrating <strong>C. Cecil Antony Heartson</strong> receiving his First Holy Communion! His proud parents are C. Valerian Gracias Cyril & R. Infant Mychiline Priya.";
+        if (input.includes('விருந்து') || input.includes('சாப்பாடு')) {
+            return "விருந்து நடைபெறும் இடம்: <strong>Zone Connect</strong>.<br>முகவரி: 39, கலப்பட்டி மெயின் ரோடு, கோயம்புத்தூர் – 641048.<br><a href='https://maps.google.com/?q=Zone+Connect+39+Kalapatti+Main+Road+Coimbatore' target='_blank' style='color:#8b0000; font-weight:bold;'>காண வரைபடம் 📍</a>";
         }
-        if (input.includes('god') || input.includes('godparents') || input.includes('sponsor')) {
-            return "Cecil's wonderful Godparents are <strong>D.A.A.P Chandran</strong> and <strong>I. Josephine Maria Assunta</strong>.";
+        if (input.includes('யார்') || input.includes('parents') || input.includes('பையன்')) {
+            return "எங்கள் அன்பு மகன் <strong>C. Cecil Antony Heartson</strong> முதல் திருவிருந்து பெறுகிறார்! பெற்றோர்கள் C. Valerian Gracias Cyril மற்றும் R. Infant Mychiline Priya.";
         }
-        if (input.includes('gift') || input.includes('bring') || input.includes('dress') || input.includes('wear')) {
-            return "Your presence and your heartfelt prayers are the greatest gifts of all! We just want to share this blessed day with you.";
+        if (input.includes('வணக்கம்') || input.includes('ஹாய்')) {
+            return "வணக்கம்! நிகழ்வு குறித்த எந்த தகவலும் அறிய என்னை கேளுங்கள்.";
         }
-        if (input.includes('hello') || input.includes('hi') || input.includes('hey')) {
-            return "Hello there! I'm here to help you with any details regarding Cecil's Communion. Ask me about the time, location, or anything else you need!";
-        }
-        if (input.includes('thank') || input.includes('thanks')) {
-            return "You're very welcome! Let me know if you need any other details. ✨";
+        if (input.includes('நன்றி')) {
+            return "மிக்க நன்றி! தங்களை நிகழ்வில் காண ஆவலாக உள்ளோம். ✨";
         }
         
-        // Default Fallback
-        return "I'm not quite sure about that! But I can tell you about the <strong>Time</strong>, <strong>Location</strong>, our <strong>Reception</strong>, or the <strong>Family</strong>. What would you like to know?";
+        return "மன்னிக்கவும், எனக்கு சரியாக புரியவில்லை! <strong>ஆலயம் எங்கிருக்கிறது</strong>, <strong>நிகழ்வு நேரம் என்ன</strong>, அல்லது <strong>விருந்து பற்றி</strong> என்னிடம் கேட்கலாம்.";
     }
 });
